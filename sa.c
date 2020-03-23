@@ -22,10 +22,10 @@ static int D = 1; /* debug */
 int
 cost() {
   int d = 0;
-  if(COST==0){
+  if(COST==0){ /* number of misplaced tiles */
     for(int i=0 ; i<N ; i++) if(B[i]!=0 && B[i]!=i) d++;
   } else
-  if(COST==1){
+  if(COST==1){ /* manhattan heuristic */
     for(int i=0 ; i<N ; i++) 
       if(B[i]!=0) 
         d+=abs(i/SSIDE - B[i]/SSIDE)+abs(i%SSIDE - B[i]%SSIDE);
@@ -151,7 +151,7 @@ sa() {
       timer -= 1;
     }
     elapsed += m;
-    m = (int) floor(m*BETA);
+    m = (int) floor(m*BETA); /* More time spent at lower temp */
     timer = m;
     temp *= ALPHA;
     if(D){printf("At T=%f, elapsed: %i / %i, best: %i\n", 

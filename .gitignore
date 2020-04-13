@@ -3,3 +3,4 @@ output
 lldb.txt
 .sa.c.swp
 sa
+*.plist

@@ -1,0 +1,18 @@
+Miscellaneous notes
+
+lldb
+----
+
+lldb sa
+b sa
+process launch -i input
+n # step over
+s # step in
+p curCost # print variable
+
+tsp
+---
+
+http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsplib.html
+https://en.wikipedia.org/wiki/2-opt
+http://labo.algo.free.fr/robotique2004/v01/PvcCoco.cpp.html

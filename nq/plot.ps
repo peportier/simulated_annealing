@@ -1,0 +1,275 @@
+%!PS-Adobe-3.0
+/drop {pop} def
+/swap {exch} def
+/cm 28.35 def %1cm = 28.35 pt
+/xunit {1 xfactor div mul} def
+/yunit {1 yfactor div mul} def
+/unit {yunit swap xunit swap} def
+/tr {ymin sub swap xmin sub swap} def
+/mt {tr moveto} def
+/lt {tr lineto} def
+/xcenter {dup stringwidth drop 2 div neg 0 rmoveto} def
+/ycenter {0 -3 unit rmoveto} def
+/yup {0 5 unit rmoveto} def
+/ydown {neg 0 swap unit rmoveto} def
+/xright {dup stringwidth drop neg 0 rmoveto} def
+/ylabel {xmin ymax mt xcenter yup show} def
+/xlabel {xmax ymin mt ycenter show} def
+/str 20 string def
+/ytick {dup xmin swap mt -4 0 unit rlineto -2 0 unit rmoveto 
+  str cvs xright ycenter show} def
+/xtick {dup ymin mt 0 -4 unit rlineto 0 -2 unit rmoveto
+  str cvs xcenter 10 ydown show} def
+/drawFrame {[] 0 setdash 0 setgray 
+  xmin ymax mt xmin ymin lt xmax ymin lt stroke} def
+/title {xmin ymin mt 40 ydown show} def
+
+/xfactor {0.5 cm mul} def
+/yfactor {0.5 cm mul} def
+/xbase 2 def
+/ybase 4 def
+/initScaleAndFont {
+  xfactor yfactor scale xbase ybase translate
+  /Helvetica findfont 12 yunit scalefont setfont
+  1 xunit setlinewidth } def
+
+%initScaleAndFont 
+%newpath
+%/xmin 16 def
+%/ymin 0 def
+%/xmax 25 def
+%/ymax 3 def
+%drawFrame
+%(Y Label) ylabel
+%(X Label) xlabel
+%0 ytick
+%1 ytick
+%2 ytick
+%3 ytick
+%stroke
+%17 xtick
+%20 xtick
+%25 xtick
+%stroke
+%[] 0 setdash
+%23.25 2 mt
+%21.62 2 lt
+%20.11 3 lt
+%18.70 1 lt
+%17.39 2 lt
+%16 0 lt
+%stroke
+
+initScaleAndFont
+newpath
+/xmin 2 def
+/ymin 0 def
+/xmax 25 def
+/ymax 19 def
+drawFrame
+(Cost) ylabel
+(Temperature) xlabel
+2 xtick
+7 xtick
+12 xtick
+17 xtick
+22 xtick
+0 ytick
+5 ytick
+10 ytick
+15 ytick
+(20 queens T0 25 ALPHA 1.05 BETA 0.001 MAXTIME 10^8) title
+stroke
+25.00 19 mt
+25.00 2 lt
+23.25 2 lt
+21.62 2 lt
+20.11 2 lt
+18.70 1 lt
+17.39 2 lt
+16.17 2 lt
+15.04 2 lt
+13.99 2 lt
+13.01 2 lt
+12.10 2 lt
+11.25 2 lt
+10.46 2 lt
+9.73 2 lt
+9.05 2 lt
+8.42 1 lt
+7.83 2 lt
+7.28 2 lt
+6.77 1 lt
+6.30 2 lt
+5.86 1 lt
+5.45 2 lt
+5.06 1 lt
+4.71 2 lt
+4.38 2 lt
+4.07 2 lt
+3.79 1 lt
+3.52 1 lt
+3.28 1 lt
+3.05 1 lt
+2.83 1 lt
+2.64 1 lt
+2.45 1 lt
+2.28 0 lt
+stroke
+showpage
+initScaleAndFont
+newpath
+/xmin 0 def
+/ymin 0 def
+/xmax 25 def
+/ymax 29 def
+drawFrame
+(Cost) ylabel
+(Temperature) xlabel
+0 xtick
+5 xtick
+10 xtick
+15 xtick
+20 xtick
+0 ytick
+5 ytick
+10 ytick
+15 ytick
+20 ytick
+25 ytick
+(30 queens T0 25 ALPHA 1.05 BETA 0.001 MAXTIME 10^8) title
+stroke
+25.00 29 mt
+25.00 6 lt
+23.25 5 lt
+21.62 5 lt
+20.11 5 lt
+18.70 3 lt
+17.39 5 lt
+16.17 5 lt
+15.04 6 lt
+13.99 6 lt
+13.01 6 lt
+12.10 4 lt
+11.25 5 lt
+10.46 5 lt
+9.73 5 lt
+9.05 4 lt
+8.42 5 lt
+7.83 4 lt
+7.28 4 lt
+6.77 5 lt
+6.30 5 lt
+5.86 5 lt
+5.45 4 lt
+5.06 3 lt
+4.71 4 lt
+4.38 4 lt
+4.07 4 lt
+3.79 4 lt
+3.52 3 lt
+3.28 3 lt
+3.05 3 lt
+2.83 4 lt
+2.64 3 lt
+2.45 4 lt
+2.28 4 lt
+2.12 3 lt
+1.97 2 lt
+1.83 3 lt
+1.71 2 lt
+1.59 3 lt
+1.47 2 lt
+1.37 2 lt
+1.28 2 lt
+1.19 2 lt
+1.10 1 lt
+1.03 1 lt
+0.95 1 lt
+0.89 1 lt
+0.83 0 lt
+stroke
+showpage
+initScaleAndFont
+newpath
+/xmin 0 def
+/ymin 0 def
+/xmax 25 def
+/ymax 39 def
+drawFrame
+(Cost) ylabel
+(Temperature) xlabel
+0 xtick
+5 xtick
+10 xtick
+15 xtick
+20 xtick
+0 ytick
+5 ytick
+10 ytick
+15 ytick
+20 ytick
+25 ytick
+30 ytick
+35 ytick
+(40 queens T0 25 ALPHA 1.05 BETA 0.001 MAXTIME 10^8) title
+stroke
+25.00 39 mt
+25.00 9 lt
+23.25 9 lt
+21.62 9 lt
+20.11 8 lt
+18.70 9 lt
+17.39 8 lt
+16.17 9 lt
+15.04 9 lt
+13.99 8 lt
+13.01 6 lt
+12.10 8 lt
+11.25 9 lt
+10.46 7 lt
+9.73 9 lt
+9.05 8 lt
+8.42 7 lt
+7.83 8 lt
+7.28 8 lt
+6.77 8 lt
+6.30 8 lt
+5.86 7 lt
+5.45 8 lt
+5.06 7 lt
+4.71 8 lt
+4.38 8 lt
+4.07 7 lt
+3.79 7 lt
+3.52 6 lt
+3.28 5 lt
+3.05 7 lt
+2.83 7 lt
+2.64 7 lt
+2.45 5 lt
+2.28 6 lt
+2.12 5 lt
+1.97 6 lt
+1.83 6 lt
+1.71 5 lt
+1.59 5 lt
+1.47 4 lt
+1.37 4 lt
+1.28 4 lt
+1.19 3 lt
+1.10 3 lt
+1.03 3 lt
+0.95 3 lt
+0.89 2 lt
+0.83 2 lt
+0.77 1 lt
+0.71 1 lt
+0.66 2 lt
+0.62 1 lt
+0.57 1 lt
+0.53 1 lt
+0.50 1 lt
+0.46 0 lt
+stroke
+showpage

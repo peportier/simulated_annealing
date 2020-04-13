@@ -1,0 +1,62 @@
+%!PS-Adobe-3.0
+/drop {pop} def
+/swap {exch} def
+/cm 28.35 def %1cm = 28.35 pt
+/xunit {1 xfactor div mul} def
+/yunit {1 yfactor div mul} def
+/unit {yunit swap xunit swap} def
+/tr {ymin sub swap xmin sub swap} def
+/mt {tr moveto} def
+/lt {tr lineto} def
+/xcenter {dup stringwidth drop 2 div neg 0 rmoveto} def
+/ycenter {0 -3 unit rmoveto} def
+/yup {0 5 unit rmoveto} def
+/ydown {neg 0 swap unit rmoveto} def
+/xright {dup stringwidth drop neg 0 rmoveto} def
+/ylabel {xmin ymax mt xcenter yup show} def
+/xlabel {xmax ymin mt ycenter show} def
+/str 20 string def
+/ytick {dup xmin swap mt -4 0 unit rlineto -2 0 unit rmoveto 
+  str cvs xright ycenter show} def
+/xtick {dup ymin mt 0 -4 unit rlineto 0 -2 unit rmoveto
+  str cvs xcenter 10 ydown show} def
+/drawFrame {[] 0 setdash 0 setgray 
+  xmin ymax mt xmin ymin lt xmax ymin lt stroke} def
+/title {xmin ymin mt 40 ydown show} def
+
+/xfactor {0.5 cm mul} def
+/yfactor {0.5 cm mul} def
+/xbase 2 def
+/ybase 4 def
+/initScaleAndFont {
+  xfactor yfactor scale xbase ybase translate
+  /Helvetica findfont 12 yunit scalefont setfont
+  1 xunit setlinewidth } def
+
+%initScaleAndFont 
+%newpath
+%/xmin 16 def
+%/ymin 0 def
+%/xmax 25 def
+%/ymax 3 def
+%drawFrame
+%(Y Label) ylabel
+%(X Label) xlabel
+%0 ytick
+%1 ytick
+%2 ytick
+%3 ytick
+%stroke
+%17 xtick
+%20 xtick
+%25 xtick
+%stroke
+%[] 0 setdash
+%23.25 2 mt
+%21.62 2 lt
+%20.11 3 lt
+%18.70 1 lt
+%17.39 2 lt
+%16 0 lt
+%stroke
+

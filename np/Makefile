@@ -5,7 +5,7 @@
 # CFLAGS = -g   (for debugging)
 CFLAGS = -O3
 
-TARGET = sa
+TARGET = np
 
 all: $(TARGET)
 

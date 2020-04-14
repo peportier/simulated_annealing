@@ -20,6 +20,6 @@ Title of the second n-puzzle to solve
 
 * The first five lines are the values of the parameters for the simulated annealing strategy.
 * Afterwards, each puzzle is described by two consecutives lines. The first one is a title.
-* The seond one describes the initial configuration. It is made of numbers separated by spaces.
+* The second one describes the initial configuration. It is made of numbers separated by spaces.
   * The first number is the total number of tiles of the board.
   * The following numbers are the tiles from left to right and from top to bottom. `0` represents the empty tile.

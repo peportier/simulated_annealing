@@ -7,21 +7,21 @@
 
 struct Move { int src; int dst; };
 
-static int N;           /* grid has N locations */
-static int SSIDE;       /* grid's side has length SSIDE */
-static int *B;          /* board */
+static int N;           /* grid has N locations                     */
+static int SSIDE;       /* grid's side has length SSIDE             */
+static int *B;          /* board                                    */
 static struct Move NEI[4] = {{0,0},{0,0},{0,0},{0,0}};
-static int SNEI;        /* current config has SNEI neighbors */
-static float T0;        /* initial temperature */
-static float ALPHA;     /* T[n+1] = ALPHA * T[n] ; ALPHA < 0 */
-static int MAXTIME; /* annealing stops when time exceeds MAXTIME */
-static float BETA; /* with M[n] the time spent at temperature T[n] */
-                   /* M[n+1] = BETA * M[n] ; BETA > 0              */
-static float BETA0;     /* M[0] = BETA0 * MAXTIME */
-static float MINTEMP;   /* smallest temperature attained */
-static int MAXCOST;     /* max of min of costs at each temp */
-static int MINCOST;     /* min of all costs encountered */
-static char TITLE[100]; /* plot title */
+static int SNEI;        /* current config has SNEI neighbors        */
+static float T0;        /* initial temperature                      */
+static float ALPHA;     /* T[n+1] = ALPHA * T[n] ; ALPHA < 0        */
+static int MAXTIME; /* annealing stops when time exceeds MAXTIME    */
+static float BETA; /* M[n] amount of time spent at temperature T[n] */
+                   /* M[n+1] = BETA * M[n] ; BETA > 0               */
+static float BETA0;     /* M[0] = BETA0 * MAXTIME                   */
+static float MINTEMP;   /* smallest temperature attained            */
+static int MAXCOST;     /* max of min of costs at each temp         */
+static int MINCOST;     /* min of all costs encountered             */
+static char TITLE[100]; /* plot title                               */
 
 int
 cost() { /* manhattan heuristic */

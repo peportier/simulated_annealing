@@ -10,7 +10,7 @@ TARGET = nq
 all: $(TARGET)
 
 $(TARGET): $(TARGET).c
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c
+	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c -lm
 
 clean:
 	rm -f $(TARGET)

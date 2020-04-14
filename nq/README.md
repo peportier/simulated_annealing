@@ -26,8 +26,8 @@ Title of the second n-queens problem to solve
   It is made of numbers separated by spaces.
   * The first number is the total number of queens.
   * The following numbers are the initial rows of queens 0 to N-1.
-  * In the code, a configuration is represented such that queen i 
-    stays on column i.
+    This is sufficient since, in the code, a configuration is 
+    represented such that queen i stays on column i.
   * Thus for the two examples above, the queens are positioned on 
     the principal diagonal.
     * With such an initial configuration, if a move is the swap of 

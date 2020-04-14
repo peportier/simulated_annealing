@@ -3,34 +3,34 @@
 #include <math.h>
 #include <time.h>
 #include <string.h>
-#define D 0                /* debug */
+#define D 0             /* debug */
 
-static int N;           /* chessboard has N*N squares */
-static int SDIAG;       /* chessboard has SDIAG diagonals */
-static int *B;          /* B[i] is the row of the queen on col i */
-static int *D1;         /* main diagonals */
-static int *D2;         /* anti diagonals */
-static float T0;        /* initial temperature */
-static float ALPHA;     /* T[n+1] = ALPHA * T[n] ; ALPHA < 0 */
-static int MAXTIME; /* annealing stops when time exceeds MAXTIME */
-static float BETA; /* with M[n] the time spent at temperature T[n] */
-                   /* M[n+1] = BETA * M[n] ; BETA > 0              */
-static float BETA0;     /* M[0] = BETA0 * MAXTIME */
-static float MINTEMP;   /* smallest temperature attained */
-static int MAXCOST;     /* max of min of costs at each temp */
-static int MINCOST;     /* min of all costs encountered */
-static char TITLE[100]; /* plot title */
+static int N;           /* chessboard has N*N squares               */
+static int SDIAG;       /* chessboard has SDIAG diagonals           */
+static int *B;          /* B[i] is the row of the queen on col i    */
+static int *D1;         /* main diagonals                           */
+static int *D2;         /* anti diagonals                           */
+static float T0;        /* initial temperature                      */
+static float ALPHA;     /* T[n+1] = ALPHA * T[n] ; ALPHA < 0        */
+static int MAXTIME;     /* annealing stops after at most MAXTIME    */
+static float BETA;      /* M[n]= time spent at temperature T[n]     */
+                        /* M[n+1]= BETA * M[n] ; BETA > 0           */
+static float BETA0;     /* M[0] = BETA0 * MAXTIME                   */
+static float MINTEMP;   /* smallest temperature attained            */
+static int MAXCOST;     /* max of min of costs at each temperature  */
+static int MINCOST;     /* min of all costs encountered             */
+static char TITLE[100]; /* title of the plot                        */
 
-int
+int /* number of pairs of queens attacking each other */
 cost() {
   int k, d = 0;
   for (int i=0;i<SDIAG;i++) {D1[i]=0; D2[i]=0;}
   for (int i=0;i<N;i++) {
     k = (i-B[i])+N-1; /* all cases of the main diagonal controlled by 
-                         queen i have the same k*/
+                         queen i have the same k                    */
     if (D1[k]==0) D1[k]++; else d++;
     k = (i+B[i]);     /* all cases of the anti diagonal controlled by 
-                         queen i have the same k*/
+                         queen i have the same k                    */
     if (D2[k]==0) D2[k]++; else d++;
   }
   return d;
@@ -65,14 +65,14 @@ scanConfig() {
   return 1;
 }
 
-void
+void /* swap rows of queens on columns i and j */
 doMove(int i, int j) { int t = B[i]; B[i] = B[j]; B[j] = t; }
 
-double
+double /* random number between 0 and 1 */
 rand01() { return rand()/(double)RAND_MAX; }
 
-/* Simulated annealing. Evaluation of a neighbor. */
-int
+
+int /* Simulated annealing. Evaluation of a random neighbor. */
 saStep(int curCost, float temp) {
   int newCost, deltaCost, rndMoveI, rndMoveJ;
   rndMoveJ = rndMoveI = rand() % N;
@@ -92,8 +92,8 @@ saStep(int curCost, float temp) {
   return curCost;
 }
 
-/* simulated annealing */
-void
+
+void /* simulated annealing */
 sa() {
   FILE *fp = fopen("plotTmp", "w");
   int solutionFound=0;
@@ -125,17 +125,17 @@ sa() {
   fclose(fp);
 }
 
-void
+void /* copy the content of file s in file d */
 fcopy(FILE *s, FILE *d) {int c; while ((c=getc(s))!=EOF) putc(c,d);}
 
-void
+void /* load a prelude of postscript functions */
 initPlot() {
   FILE *fpPlot = fopen("plot.ps", "w");
   FILE *fp = fopen("base.ps", "r"); fcopy(fp, fpPlot); fclose(fp);
   fclose(fpPlot);
 }
 
-void
+void /* plot cost against temperature */
 plot() {
   FILE *fp = fopen("plot.ps", "a");
   int xmin = (int) floor(MINTEMP), ymin = MINCOST;

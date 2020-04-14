@@ -7,24 +7,24 @@
 
 struct Move { int src; int dst; };
 
-static int N;           /* grid has N locations                     */
-static int SSIDE;       /* grid's side has length SSIDE             */
+static int N;           /* board has N locations                    */
+static int SSIDE;       /* board's side has length SSIDE            */
 static int *B;          /* board                                    */
 static struct Move NEI[4] = {{0,0},{0,0},{0,0},{0,0}};
 static int SNEI;        /* current config has SNEI neighbors        */
 static float T0;        /* initial temperature                      */
 static float ALPHA;     /* T[n+1] = ALPHA * T[n] ; ALPHA < 0        */
-static int MAXTIME; /* annealing stops when time exceeds MAXTIME    */
-static float BETA; /* M[n] amount of time spent at temperature T[n] */
-                   /* M[n+1] = BETA * M[n] ; BETA > 0               */
+static int MAXTIME;     /* annealing stops after at most MAXTIME    */
+static float BETA;      /* M[n]= time spent at temperature T[n]     */
+                        /* M[n+1] = BETA * M[n] ; BETA > 0          */
 static float BETA0;     /* M[0] = BETA0 * MAXTIME                   */
 static float MINTEMP;   /* smallest temperature attained            */
 static int MAXCOST;     /* max of min of costs at each temp         */
 static int MINCOST;     /* min of all costs encountered             */
-static char TITLE[100]; /* plot title                               */
+static char TITLE[100]; /* title of the plot                        */
 
-int
-cost() { /* manhattan heuristic */
+int /* manhattan heuristic */
+cost() {
   int d = 0;
   for(int i=0 ; i<N ; i++) 
     if(B[i]!=0) 
@@ -93,11 +93,10 @@ doMove(struct Move *mv) {
   int tmp = B[mv->src]; B[mv->src] = B[mv->dst]; B[mv->dst] = tmp;
 }
 
-double
+double /* random number between 0 and 1 */
 rand01() { return rand()/(double)RAND_MAX; }
 
-/* Simulated annealing. Evaluation of a neighbor. */
-int
+int /* Simulated annealing. Evaluation of a random neighbor. */
 saStep(int curCost, float temp) {
   int newCost, deltaCost, rndMove;
   buildNeighborhood();
@@ -117,8 +116,7 @@ saStep(int curCost, float temp) {
   return curCost;
 }
 
-/* Simulated annealing */
-void
+void /* Simulated annealing */
 sa() {
   FILE *fp = fopen("plotTmp", "w");
   int solutionFound=0;
@@ -150,17 +148,17 @@ sa() {
   fclose(fp);
 }
 
-void
+void /* copy the content of file s in file d */
 fcopy(FILE *s, FILE *d) {int c; while ((c=getc(s))!=EOF) putc(c,d);}
 
-void
+void /* load a prelude of postscript functions */
 initPlot() {
   FILE *fpPlot = fopen("plot.ps", "w");
   FILE *fp = fopen("base.ps", "r"); fcopy(fp, fpPlot); fclose(fp);
   fclose(fpPlot);
 }
 
-void
+void /* plot cost against temperature */
 plot() {
   FILE *fp = fopen("plot.ps", "a");
   int xmin = (int) floor(MINTEMP), ymin = MINCOST;

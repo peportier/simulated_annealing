@@ -1,4 +1,4 @@
-# simulated annealing for N-Queens
+# Simulated annealing applied to N-Queens
 
 Example : `./nq <input`
 

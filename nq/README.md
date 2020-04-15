@@ -20,16 +20,16 @@ Title of the second n-queens problem to solve
 
 * The first five lines are the values of the parameters for the 
   simulated annealing strategy.
-* Afterwards, each puzzle is described by two consecutives lines. 
+* Afterwards, each puzzle is described by two consecutive lines. 
   The first one is a title.
 * The second one describes the initial configuration. 
   It is made of numbers separated by spaces.
   * The first number is the total number of queens.
   * The following numbers are the initial rows of queens 0 to N-1.
-    This is sufficient since, in the code, a configuration is 
-    represented such that queen i stays on column i.
+    It works since a configuration is represented such that queen i 
+    stays on column i.
   * Thus for the two examples above, the queens are positioned on 
     the principal diagonal.
     * With such an initial configuration, if a move is the swap of 
       the rows of two queens, then queens can only be attacked on 
-      the diagonals. This property is used in the code.
+      diagonals. This property is used in the code.

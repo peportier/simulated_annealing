@@ -1,4 +1,4 @@
-# simulated annealing for N-Puzzle
+# Simulated annealing applied to N-Puzzle
 
 Example : `./np <input`
 
@@ -19,7 +19,7 @@ Title of the second n-puzzle to solve
 ```
 
 * The first five lines are the values of the parameters for the simulated annealing strategy.
-* Afterwards, each puzzle is described by two consecutives lines. The first one is a title.
+* Afterwards, each puzzle is described by two consecutive lines. The first one is a title.
 * The second one describes the initial configuration. It is made of numbers separated by spaces.
-  * The first number is the total number of tiles of the board.
+  * The first number is the total number of tiles.
   * The following numbers are the tiles from left to right and from top to bottom. `0` represents the empty tile.

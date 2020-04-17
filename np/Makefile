@@ -3,14 +3,16 @@
 
 # CFLAGS = -O3  (for best performance)
 # CFLAGS = -g   (for debugging)
-CFLAGS = -O3
+CFLAGS = -O3 -Wall
+
+LIBS = -lm
 
 TARGET = np
 
 all: $(TARGET)
 
 $(TARGET): $(TARGET).c
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c -lm
+	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c $(LIBS)
 
 clean:
 	rm -f $(TARGET)

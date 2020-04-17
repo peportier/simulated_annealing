@@ -16,6 +16,7 @@ Title of the first n-puzzle to solve
 9 4 8 3 2 0 7 6 5 1
 Title of the second n-puzzle to solve
 16 7 11 8 3 14 0 6 15 1 4 13 9 5 12 2 10
+END
 ```
 
 * The first five lines are the values of the parameters for the simulated annealing strategy.

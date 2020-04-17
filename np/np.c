@@ -48,7 +48,7 @@ emptyLoc() {int i=0; for(;i<N;i++) if(B[i]==0) break; return i;}
    neighborhood (comprised of at most 4 configurations). Then, in
    saStep one member of the neighborhood is randomly selected.
    For other problems, such as n-queens, it doesn't seem necessary 
-   since one can easily randomly generate a single neighboor.       */
+   since one can easily randomly generate a single neighbor.        */
 void 
 buildNeighborhood() {
   int z = emptyLoc();
@@ -140,9 +140,13 @@ saStep(int curCost, float temp) {
   doMove(&NEI[rndMove]);
   newCost = cost();
   deltaCost = newCost - curCost; 
-  if (deltaCost < 0) {
-    curCost = newCost;
+  if (deltaCost < 0) { 
+    /* if the random neighbor improves the current config, keep it */
+    curCost = newCost;    
   } else {
+    /* if the random neighbor deteriorates the current config,
+       there is still a chance to keep it. The higher the temperature, 
+       the greater The probability to keep it. */
     if (rand01() < exp(- deltaCost / temp)) {
       curCost = newCost;
     } else {

@@ -41,24 +41,51 @@ printConfig() {
   for (int i=0;i<N;i++) printf("%i ", B[i]); printf("\n");
 }
 
-void
+void /* the first lines of stdin must contain parameters */
 scanParam() {
-  scanf("T0 = %f\n", &T0);
-  scanf("ALPHA = %f\n", &ALPHA);
-  scanf("BETA = %f\n", &BETA);
-  scanf("BETA0 = %f\n", &BETA0);
-  scanf("MAXTIME = %i\n", &MAXTIME);
+  if (scanf("T0 = %f\n", &T0) != 1) {
+    fprintf(stderr, "error scan TO\n");
+    exit(1);
+  }
+  if (scanf("ALPHA = %f\n", &ALPHA) != 1) {
+    fprintf(stderr, "error scan ALPHA\n");
+    exit(1);
+  }
+  if (scanf("BETA = %f\n", &BETA) != 1) {
+    fprintf(stderr, "error scan BETA\n");
+    exit(1);
+  }
+  if (scanf("BETA0 = %f\n", &BETA0) != 1) {
+    fprintf(stderr, "error scan BETA0\n");
+    exit(1);
+  }
+  if (scanf("MAXTIME = %i\n", &MAXTIME) != 1) {
+    fprintf(stderr, "error scan MAXTIME\n");
+    exit(1);
+  }
 }
 
 int
 scanConfig() {
-  fgets(TITLE, 100, stdin); strtok(TITLE,"\n");
-  int r = scanf("%i", &N);
-  if (r == 0 || r == EOF) return 0;
+  if (fgets(TITLE, 100, stdin) == NULL) {
+    fprintf(stderr, "error reading title configuration\n"); 
+    exit(1);
+  }
+  strtok(TITLE, "\n");
+  if (strcmp(TITLE, "END") == 0) return 0;
+  if (scanf("%i", &N) != 1) {
+    fprintf(stderr, "error scan number of tiles\n");
+    exit(1);
+  }
   SDIAG = 2*N-1;
   free(B);
   B = malloc(N*sizeof(int));
-  for (int i=0 ; i<N ; i++) scanf("%i", &B[i]);
+  for (int i=0 ; i<N ; i++) {
+    if (scanf("%i", &B[i]) != 1) {
+      fprintf(stderr, "error scan single value of config\n");
+      exit(1);
+    }
+  }
   scanf("\n"); /* ready to scan the next config line */
   free(D1); D1 = malloc(SDIAG*sizeof(int));
   free(D2); D2 = malloc(SDIAG*sizeof(int));
@@ -96,6 +123,10 @@ saStep(int curCost, float temp) {
 void /* simulated annealing */
 sa() {
   FILE *fp = fopen("plotTmp", "w");
+  if (fp == NULL) {
+    fprintf(stderr, "error fopen plotTmp in sa()\n");
+    exit(1);
+  }
   int solutionFound=0;
   int curCost = cost();
   int bestCost = MAXCOST = MINCOST = curCost;
@@ -131,13 +162,26 @@ fcopy(FILE *s, FILE *d) {int c; while ((c=getc(s))!=EOF) putc(c,d);}
 void /* load a prelude of postscript functions */
 initPlot() {
   FILE *fpPlot = fopen("plot.ps", "w");
-  FILE *fp = fopen("base.ps", "r"); fcopy(fp, fpPlot); fclose(fp);
-  fclose(fpPlot);
+  if (fpPlot == NULL) {
+    fprintf(stderr, "error fopen plot.ps in initPlot()\n");
+    exit(1);
+  }
+  FILE *fp = fopen("base.ps", "r"); 
+  if (fp == NULL) {
+    fprintf(stderr, "error fopen base.ps in initPlot()\n");
+    exit(1);
+  }
+  fcopy(fp, fpPlot); 
+  fclose(fp); fclose(fpPlot);
 }
 
 void /* plot cost against temperature */
 plot() {
   FILE *fp = fopen("plot.ps", "a");
+  if (fp == NULL) {
+    fprintf(stderr, "error fopen plot.ps in plot()\n");
+    exit(1);
+  }
   int xmin = (int) floor(MINTEMP), ymin = MINCOST;
   int xmax = (int) floor(T0), ymax = MAXCOST;
   fprintf(fp, "initScaleAndFont\n");
@@ -153,8 +197,16 @@ plot() {
   for (int i=ymin;i<ymax;i+=5) fprintf(fp, "%i ytick\n", i);
   fprintf(fp, "(%s) title\n", TITLE);
   fprintf(fp, "stroke\n");
-  FILE *fp2 = fopen("plotTmp", "r"); fcopy(fp2, fp); fclose(fp2);
-  remove("plotTmp");
+  FILE *fp2 = fopen("plotTmp", "r"); 
+  if (fp2 == NULL) {
+    fprintf(stderr, "error fopen plotTmp in plot()\n");
+    exit(1);
+  }
+  fcopy(fp2, fp); fclose(fp2);
+  if (remove("plotTmp") != 0) {
+    fprintf(stderr, "error remove plotTmp in plot()\n");
+    exit(1);
+  }
   fprintf(fp, "stroke\nshowpage\n");
   fclose(fp);
 }

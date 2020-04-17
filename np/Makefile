@@ -1,4 +1,4 @@
-# sa - simulated annealing applied to n-puzzle
+# np - simulated annealing applied to n-puzzle
 # See LICENSE file for copyright and license details.
 
 # CFLAGS = -O3  (for best performance)
